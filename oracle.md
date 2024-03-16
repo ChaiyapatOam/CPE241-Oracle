@@ -3,15 +3,31 @@
 6.1 All Columns, All Row
 
 ```sql
-SELECT staffNo, fName, lName, address,
+SELECT staffNo, fName, lName,
 position, sex, DOB, salary, branchNo
 FROM Staff;
 ```
+
+| Oracle                 |
+| ---------------------- |
+| ![alt text](image.png) |
+
+| MariaDB                  |
+| ------------------------ |
+| ![alt text](image-1.png) |
 
 ```sql
 SELECT *
 FROM Staff;
 ```
+
+| Oracle                   |
+| ------------------------ |
+| ![alt text](image-2.png) |
+
+| MariaDB                  |
+| ------------------------ |
+| ![alt text](image-3.png) |
 
 6.2 Specific Columns, All Rows
 
@@ -20,6 +36,14 @@ SELECT staffNo, fName, lName, salary
 FROM Staff;
 ```
 
+| Oracle                   |
+| ------------------------ |
+| ![alt text](image-4.png) |
+
+| MariaDB                  |
+| ------------------------ |
+| ![alt text](image-5.png) |
+
 6.3 Use of DISTINCT
 
 ```sql
@@ -27,10 +51,26 @@ SELECT propertyNo
 FROM Viewing;
 ```
 
+| Oracle                   |
+| ------------------------ |
+| ![alt text](image-6.png) |
+
+| MariaDB                  |
+| ------------------------ |
+| ![alt text](image-7.png) |
+
 ```sql
 SELECT DISTINCT propertyNo
 FROM Viewing;
 ```
+
+| Oracle                   |
+| ------------------------ |
+| ![alt text](image-8.png) |
+
+| MariaDB                  |
+| ------------------------ |
+| ![alt text](image-9.png) |
 
 6.4 Calculated Fields
 
@@ -38,6 +78,14 @@ FROM Viewing;
 SELECT staffNo, fName, lName, salary/12
 FROM Staff;
 ```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-10.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-11.png) |
 
 To name column, use AS clause
 
@@ -47,6 +95,14 @@ AS monthlySalary
 FROM Staff;
 ```
 
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-12.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-13.png) |
+
 6.5 Comparison Search Condition
 
 ```sql
@@ -55,13 +111,29 @@ FROM Staff
 WHERE salary > 10000;
 ```
 
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-14.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-15.png) |
+
 List addresses of all branch offices in London or Glasgow.
 
 ```sql
 SELECT *
 FROM Branch
-WHERE city = ‘London’ OR city = ‘Glasgow’;
+WHERE city = 'London' OR city = 'Glasgow';
 ```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-17.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-16.png) |
 
 6.7 Range Search Condition
 
@@ -71,6 +143,14 @@ FROM Staff
 WHERE salary BETWEEN 20000 AND 30000;
 ```
 
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-18.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-19.png) |
+
 BETWEEN does not add much to SQL’s expressive power.
 
 ```sql
@@ -79,7 +159,13 @@ FROM Staff
 WHERE salary>=20000 AND salary <= 30000;
 ```
 
-• Useful, though, for a range of values.
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-20.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-21.png) |
 
 6.8 Set Membership
 
@@ -89,12 +175,28 @@ FROM Staff
 WHERE position IN (‘Manager’, ‘Supervisor’);
 ```
 
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-20.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-21.png) |
+
 ```sql
 SELECT staffNo, fName, lName, position
 FROM Staff
 WHERE position=‘Manager’ OR
 position=‘Supervisor’;
 ```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-20.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-21.png) |
 
 6.9 Pattern Matching
 
