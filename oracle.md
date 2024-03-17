@@ -1,4 +1,10 @@
-# SQL statement with Oracle
+# SQL statement with Oracle 📑
+
+## 🫂Author
+
+Chaiyapat Meeying 65070501073
+
+## [✨View on Github](https://github.com/ChaiyapatOam/CPE241-Oracle/blob/main/oracle.md)
 
 6.1 All Columns, All Row
 
