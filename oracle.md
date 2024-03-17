@@ -400,23 +400,47 @@ FROM Staff
 WHERE branchNo = 'B003';
 ```
 
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-45.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-46.png) |
+
 6.20 Subquery with Aggregate
 
 ```sql
 SELECT staffNo, fName, lName, position,
-salary – (SELECT AVG(salary) FROM Staff) As SalDiff
+salary - (SELECT AVG(salary) FROM Staff) As SalDiff
 FROM Staff
 WHERE salary >
 (SELECT AVG(salary)
 FROM Staff);
 ```
 
+| Oracle                     |
+| -------------------------- |
+| ![alt text](image-101.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-48.png) |
+
 ```sql
 SELECT staffNo, fName, lName, position,
-salary – 17000 As salDiff
+salary - 17000 As salDiff
 FROM Staff
 WHERE salary > 17000;
 ```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-49.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-50.png) |
 
 6.21 Nested subquery: use of IN
 
@@ -432,6 +456,14 @@ FROM Branch
 WHERE street = '163 Main St'));
 ```
 
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-51.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-52.png) |
+
 6.22 Use of ANY/SOME
 
 ```sql
@@ -442,6 +474,14 @@ WHERE salary > SOME
 FROM Staff
 WHERE branchNo = 'B003');
 ```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-53.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-54.png) |
 
 6.23 Use of ALL
 
@@ -454,15 +494,30 @@ FROM Staff
 WHERE branchNo = 'B003');
 ```
 
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-55.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-56.png) |
+
 6.24 Simple Join
 
 ```sql
 SELECT c.clientNo, fName, lName,
-propertyNo, comment
+propertyNo, 'comments'
 FROM Client c, Viewing v
-WHERE c.clientNo = v.clientNo;
-
+WHERE c.ID = v.clientID;
 ```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-57.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-58.png) |
 
 6.25 Sorting a join
 
@@ -474,6 +529,14 @@ WHERE s.staffNo = p.staffNo
 ORDER BY s.branchNo, s.staffNo, propertyNo;
 ```
 
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-59.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-60.png) |
+
 6.26 Three Table Join
 
 ```sql
@@ -483,8 +546,15 @@ FROM Branch b, Staff s, PropertyForRent p
 WHERE b.branchNo = s.branchNo AND
 s.staffNo = p.staffNo
 ORDER BY b.branchNo, s.staffNo, propertyNo;
-
 ```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-62.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-61.png) |
 
 6.27 Multiple Grouping Columns
 
@@ -496,38 +566,62 @@ GROUP BY s.branchNo, s.staffNo
 ORDER BY s.branchNo, s.staffNo;
 ```
 
-outer join
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-63.png) |
 
-```sql
-SELECT b.*, p.*
-FROM Branch1 b, PropertyForRent1 p
-WHERE b.bCity = p.pCity;
-```
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-64.png) |
 
 6.28 Left Outer Join
 
 ```sql
 SELECT b.*, p.*
-FROM Branch1 b LEFT JOIN
-PropertyForRent1 p ON b.bCity = p.pCity;
+FROM Branch b LEFT JOIN
+PropertyForRent p ON b.City = p.City;
 ```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-65.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-66.png) |
 
 6.29 Right Outer Join
 
 ```sql
 SELECT b.*, p.*
-FROM Branch1 b RIGHT JOIN
-PropertyForRent1 p ON b.bCity = p.pCity;
+FROM Branch b RIGHT JOIN
+PropertyForRent p ON b.City = p.City;
 ```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-68.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-67.png) |
 
 6.30 Full Outer Join
 
 ```sql
 SELECT b.*, p.*
-FROM Branch1 b FULL JOIN
-PropertyForRent1 p ON b.bCity = p.pCity;
+FROM Branch b FULL JOIN
+PropertyForRent p ON b.City = p.City;
 
 ```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-69.png) |
+
+| MariaDB                                                |
+| ------------------------------------------------------ |
+| MariaDB doesn't has full join![alt text](image-70.png) |
 
 6.31 Query using EXISTS
 
@@ -541,47 +635,76 @@ WHERE s.branchNo = b.branchNo AND
 city = 'London');
 ```
 
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-71.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-72.png) |
+
 ```sql
 SELECT staffNo, fName, lName, position FROM Staff
 WHERE true;
 ```
 
+| Oracle                                           |
+| ------------------------------------------------ |
+| oracle cant where true ![alt text](image-73.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-74.png) |
+
 6.32 Use of UNION
 
 ```sql
-(SELECT city
+SELECT city
 FROM Branch
-WHERE city IS NOT NULL) UNION
-(SELECT city
+WHERE city IS NOT NULL
+
+UNION
+
+SELECT city
 FROM PropertyForRent
-WHERE city IS NOT NULL);
+WHERE city IS NOT NULL;
 ```
 
-```sql
-(SELECT *
-FROM Branch
-WHERE city IS NOT NULL)
-UNION CORRESPONDING BY city
-(SELECT *
-FROM PropertyForRent
-WHERE city IS NOT NULL);
-```
+| Oracle                                      |
+| ------------------------------------------- |
+| oracle cant use ()![alt text](image-75.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-76.png) |
 
 6.33 Use of INTERSECT
 
 ```sql
-(SELECT city FROM Branch)
+SELECT city FROM Branch
 INTERSECT
-(SELECT city FROM PropertyForRent);
+SELECT city FROM PropertyForRent;
 ```
 
-```sql
-(SELECT * FROM Branch)
-INTERSECT CORRESPONDING BY city
-(SELECT * FROM PropertyForRent);
-```
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-78.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-77.png) |
 
 6.34 Use of EXCEPT
+
+for oracle
+
+```sql
+SELECT city FROM Branch
+MINUS
+SELECT city FROM PropertyForRent;
+```
+
+for sql(MariaDB)
 
 ```sql
 (SELECT city FROM Branch)
@@ -589,19 +712,36 @@ EXCEPT
 (SELECT city FROM PropertyForRent);
 ```
 
-```sql
-(SELECT * FROM Branch)
-EXCEPT CORRESPONDING BY city
-(SELECT * FROM PropertyForRent);
-```
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-80.png) |
 
-6.35 INSERT … VALUES
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-79.png) |
+
+6.35 INSERT ... VALUES
 
 ```sql
 INSERT INTO Staff
-VALUES ('SG16', 'Alan', 'Brown', 'Assistant', 'M', Date'1957-05-
-25', 8300, 'B003');
+VALUES ('SG16', 'Alan', 'Brown', 'Assistant', 'M',Date'1957-05-
+25', 8300, 'B003','12345','0879890001','example@mail.com');
 ```
+
+this is use for me
+
+```sql
+INSERT INTO Staff
+VALUES ('SG16', 'Alan', 'Brown', 'Assistant', 'M','1945-10-01 00:00:00', 8300, 'B003','12345','0879890001','example@mail.com');
+```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-81.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-82.png) |
 
 6.36 INSERT using Defaults
 
@@ -612,6 +752,14 @@ VALUES ('SG44', 'Anne', 'Jones',
 'Assistant', 8100, 'B003');
 ```
 
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-84.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-83.png) |
+
 Or
 
 ```sql
@@ -620,7 +768,7 @@ VALUES ('SG44', 'Anne', 'Jones', 'Assistant', NULL,
 NULL, 8100, 'B003');
 ```
 
-6.37 INSERT … SELECT
+6.37 INSERT ... SELECT
 
 ```sql
 INSERT INTO StaffPropCount
@@ -636,6 +784,28 @@ WHERE staffNo NOT IN
 FROM PropertyForRent));
 ```
 
+run this before (to create table)
+
+```sql
+create table StaffPropCount (
+    staffNo varchar2(50),
+    fName varchar2(50),
+    lName varchar2(50),
+    propCnt number
+);
+```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-87.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-85.png) |
+
+Result
+![alt text](image-86.png)
+
 6.38/39 UPDATE All Rows
 
 ```sql
@@ -643,11 +813,25 @@ UPDATE Staff
 SET salary = salary*1.03;
 ```
 
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-88.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-89.png) |
+
+Result
+![alt text](image-90.png)
+
 ```sql
 UPDATE Staff
 SET salary = salary*1.05
 WHERE position = 'Manager';
 ```
+
+Result
+![alt text](image-92.png)
 
 6.40 UPDATE Multiple Columns
 
@@ -657,6 +841,15 @@ SET position = 'Manager', salary = 18000
 WHERE staffNo = 'SG14';
 ```
 
+Before
+![alt text](image-93.png)
+After
+![alt text](image-94.png)
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-95.png) |
+
 6.41/42 DELETE Specific Rows
 
 ```sql
@@ -664,6 +857,25 @@ DELETE FROM Viewing
 WHERE propertyNo = 'PG4';
 ```
 
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-96.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-97.png) |
+
 ```sql
 DELETE FROM Viewing;
 ```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-99.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-98.png) |
+
+Result
+![alt text](image-100.png)
