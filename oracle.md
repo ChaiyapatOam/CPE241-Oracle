@@ -201,19 +201,35 @@ position=‘Supervisor’;
 6.9 Pattern Matching
 
 ```sql
-SELECT ownerNo, fName, lName, address, telNo
-FROM PrivateOwner
-WHERE address LIKE ‘%Glasgow%’;
+SELECT clientNo, fName, lName, Region, telNo
+FROM client
+WHERE Region LIKE '%Glasgow%';
 ```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-31.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-30.png) |
 
 6.10 NULL Search Condition
 
 ```sql
-SELECT clientNo, viewDate
+SELECT clientID, viewDate
 FROM Viewing
-WHERE propertyNo = ‘PG4’ AND
+WHERE propertyNo = 'PG4' AND
 comment IS NULL;
 ```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-23.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-22.png) |
 
 6.11 Single Column Ordering
 
@@ -223,6 +239,14 @@ FROM Staff
 ORDER BY salary DESC;
 ```
 
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-25.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-24.png) |
+
 6.12 Multiple Column Ordering
 
 ```sql
@@ -231,11 +255,27 @@ FROM PropertyForRent
 ORDER BY type;
 ```
 
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-26.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-27.png) |
+
 ```sql
 SELECT propertyNo, type, rooms, rent
 FROM PropertyForRent
 ORDER BY type, rent DESC;
 ```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-28.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-29.png) |
 
 6.13 Use of COUNT(\*)
 
@@ -245,14 +285,30 @@ FROM PropertyForRent
 WHERE rent > 350;
 ```
 
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-32.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-33.png) |
+
 6.14 Use of COUNT(DISTINCT)
 
 ```sql
 SELECT COUNT(DISTINCT propertyNo) AS myCount
 FROM Viewing
-WHERE viewDate BETWEEN ‘1-May-04’
-AND ‘31-May-04’;
+WHERE viewDate BETWEEN '1-May-04'
+AND '31-May-04';
 ```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-34.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-35.png) |
 
 6.15 Use of COUNT and SUM
 
@@ -260,8 +316,16 @@ AND ‘31-May-04’;
 SELECT COUNT(staffNo) AS myCount,
 SUM(salary) AS mySum
 FROM Staff
-WHERE position = ‘Manager’;
+WHERE position = 'Manager';
 ```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-38.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-37.png) |
 
 6.16 Use of MIN, MAX, AVG
 
@@ -271,6 +335,14 @@ MAX(salary) AS myMax,
 AVG(salary) AS myAvg
 FROM Staff;
 ```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-28.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-29.png) |
 
 6.17 Use of GROUP BY
 
@@ -283,6 +355,14 @@ GROUP BY branchNo
 ORDER BY branchNo;
 ```
 
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-28.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-29.png) |
+
 6.18 Use of HAVING
 
 ```sql
@@ -294,3 +374,11 @@ GROUP BY branchNo
 HAVING COUNT(staffNo) > 1
 ORDER BY branchNo;
 ```
+
+| Oracle                    |
+| ------------------------- |
+| ![alt text](image-28.png) |
+
+| MariaDB                   |
+| ------------------------- |
+| ![alt text](image-29.png) |
