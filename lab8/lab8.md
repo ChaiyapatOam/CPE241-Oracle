@@ -15,7 +15,8 @@ FROM `employee`
 WHERE ExperienceLevel = "Master";
 ```
 
-result
+Result:
+
 ![alt text](image.png)
 
 B. Write an SQL statement to list Name and CellPhone for all employees having an
@@ -28,7 +29,8 @@ WHERE ExperienceLevel = "Master"
 AND FirstName LIKE "J%";
 ```
 
-result
+Result:
+
 ![alt text](image-1.png)
 
 C. Write an SQL statement to list the names of employees who have worked on a property
@@ -60,8 +62,10 @@ FROM `property`
 WHERE State = 'NY');
 ```
 
-Result
+Result;
+
 ![alt text](image-4.png)
+
 D. Answer question C but use a join.
 
 ```sql
@@ -72,7 +76,8 @@ JOIN employee e ON s.EmployeeID = e.EmployeeID
 WHERE p.State = 'NY';
 ```
 
-Result
+Result:
+
 ![alt text](image-2.png)
 
 E. Write an SQL statement to list the names of employees who have worked on a property
@@ -97,7 +102,8 @@ WHERE EmployeeID IN
 )
 ```
 
-Result
+Result:
+
 ![alt text](image-9.png)
 
 F. Answer question E but use a join.
@@ -111,7 +117,8 @@ JOIN owner o ON p.OwnerID = o.OwnerID
 WHERE o.OwnerType = 'Corporation';
 ```
 
-Result
+Result:
+
 ![alt text](image-10.png)
 
 G. Write an SQL statement to show the name and sum of hours worked for each employee.
@@ -123,7 +130,8 @@ JOIN employee e ON s.EmployeeID = e.EmployeeID
 GROUP BY s.EmployeeID
 ```
 
-Result
+Result:
+
 ![alt text](image-5.png)
 
 H. Write an SQL statement to show the sum of hours worked for each ExperienceLevel of
@@ -138,6 +146,7 @@ ORDER BY e.ExperienceLevel DESC
 ```
 
 Result:
+
 ![alt text](image-8.png)
 
 I. Write an SQL statement to show the sum of HoursWorked for each Type of OWNER but
@@ -155,7 +164,8 @@ GROUP BY o.OwnerType
 HAVING COUNT(o.OwnerID) >= 3;
 ```
 
-Result
+Result:
+
 ![alt text](image-14.png)
 
 J. Write an SQL statement to insert yourself as an employee where your experience level
@@ -167,7 +177,8 @@ INSERT INTO `employee`
 VALUES ('1073', 'Meeying', 'Chaiyapat', '012345', 'Novice');
 ```
 
-Result
+Result:
+
 ![alt text](image-7.png)
 
 K. Write an SQL statement to modify all EMPLOYEE rows with ExperienceLevel of Master
@@ -182,7 +193,8 @@ SET `ExperienceLevel` =
     END;
 ```
 
-Result
+Result:
+
 ![alt text](image-11.png)
 
 L. Write an SQL statement to switch the values of ExperienceLevel so that all rows
@@ -200,7 +212,9 @@ SET `ExperienceLevel` =
 ```
 
 Result:
+
 ![alt text](image-12.png)
+
 M. Delete yourself from Employee
 
 ```sql
